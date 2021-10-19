@@ -1,0 +1,82 @@
+﻿@model ClinicaMedicaWeb.Models.Login;
+
+@if (TempData["TipoMensagem"] != null)
+{
+    if (TempData["TipoMensagem"].ToString() == "ERRO")
+    {
+        <div class="alert alert-danger">@TempData["Mensagem"].ToString()</div>
+    }
+    else if (TempData["TipoMensagem"].ToString() == "SUCESSO")
+    {
+        <div class="alert alert-success">@TempData["Mensagem"].ToString()</div>
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <div class="container mt-5">
+        <form method="post" asp-action="RedefinirSenha">
+            <input type="hidden" asp-for="ID" />
+
+            <div class="form-group">
+                <label asp-for="Email">E-mail</label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SenhaAtual">Senha Atual</label>
+                <input asp-for="SenhaAtual" class="form-control" />
+                <span asp-validation-for="SenhaAtual" class="text-danger"></span>
+                <a asp-controller="Login" asp-action="RecuperarSenha"> Esqueceu a senha?</a>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Senha">Nova Senha</label>
+                <input asp-for="Senha" class="form-control" />
+                <span asp-validation-for="Senha" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SenhaConfirmar">Confirmar Senha</label>
+                <input asp-for="SenhaConfirmar" class="form-control" />
+                <span asp-validation-for="SenhaConfirmar" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+
+        @if (ViewBag.Erro != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Erro</div>
+        }
+
+        @if (ViewBag.Sucesso != null)
+        {
+            <div class="alert alert-success">@ViewBag.Sucesso</div>
+        }
+
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
