@@ -100,6 +100,8 @@ namespace ClinicaMedicaWeb.Controllers
                 userSecretaria = dataContext.TBSecretaria.Include(x => x.Login).FirstOrDefault(x => x.LoginID == login.ID);
             }
 
+            ModelState.Clear();
+
             if (ModelState.IsValid)
             {
                 if (userAdmin != null)
@@ -492,7 +494,7 @@ namespace ClinicaMedicaWeb.Controllers
             {
                 LinkRecuperarSenha(login);
 
-                ViewBag.Sucesso = "O link de recuperação de senha foi enviado em seu e-mail!";
+                ViewBag.Sucesso = "Se há um usuário existe, o link de recuperação de senha será enviado neste e-mail!";
                 return View();
             }
             else
