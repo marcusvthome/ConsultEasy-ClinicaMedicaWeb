@@ -1,0 +1,38 @@
+﻿@model ClinicaMedicaWeb.Models.Consulta;
+
+@if (ViewBag.TipoMensagem != null)
+{
+    if (ViewBag.TipoMensagem == "ERRO")
+    {
+<div class="alert alert-danger">@ViewBag.Mensagem</div> }
+else if (ViewBag.TipoMensagem == "SUCESSO")
+{
+<div class="alert alert-success">@ViewBag.Mensagem</div>}
+}
+
+<form method="post" asp-action="Delete">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <div class="form-group">
+            <label asp-for="Secretaria.Nome">Secretario(a)</label>
+            <input asp-for="Secretaria.Nome" class="form-control" value="@User.Identity.Name" readonly />
+            <input asp-for="SecretariaIdCancelamento" value="@User.Claims.First(x => x.Type == System.Security.Claims.ClaimTypes.Sid).Value" type="hidden" />
+            <span asp-validation-for="SecretariaIdCancelamento" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="MotivoCancelamento">Motivo do Cancelamento</label>
+            <textarea asp-for="MotivoCancelamento" class="form-control" rows="3"></textarea>
+            <span asp-validation-for="MotivoCancelamento" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-secondary" asp-controller="Consulta" asp-action="Index">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Confirmar Exclusão</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

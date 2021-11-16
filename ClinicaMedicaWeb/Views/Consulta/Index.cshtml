@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Consulta>;
+
+<h1>ConsultEasy</h1>
+
+<a asp-action="Create">Agendar Nova Consulta</a>
+
+@if (TempData["TipoMensagem"] != null)
+{
+    if (TempData["TipoMensagem"].ToString() == "ERRO")
+    {
+        <div class="alert alert-danger">@TempData["Mensagem"].ToString()</div>
+    }
+    else if (TempData["TipoMensagem"].ToString() == "SUCESSO")
+    {
+        <div class="alert alert-success">@TempData["Mensagem"].ToString()</div>
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+
+        <input id="dateDataConsulta" name="DataConsulta" type="date" class="span4" value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day" />
+
+        <input id="txtNomePaciente" name="NomePaciente" class="span4" placeholder="Pesquisar por Paciente" />
+
+        <input id="txtNomeMedico" name="NomeMedico" class="span4" placeholder="Pesquisar por Médico" />
+
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </div>
+</form>
+
+<form>
+    <div class="modal" id="modalConfirmacao" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <div>
+                            <i class="fa fa-4x fa-minus-circle text-info"></i>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center" style="padding-top: 12px;">
+                        <span class="h4">Tem certeza?</span>
+                    </div>
+                    <div>
+                        <small style="text-align: center">Deseja realmente confirmar a presença do paciente? </small>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center" style="border-top: 0px;">
+                    <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Não</button>
+                    <button type="submit" class="btn btn-sm btn-success" asp-action="ConfirmarPresenca" id="btnConfirmar">Sim</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            Data
+        </div>
+        <div align="center" class="col-sm-1">
+            Hora
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Paciente)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Medico)
+        </div>
+        <div class="col-sm-1">
+            Reagendar
+        </div>
+        <div class="col-sm-1">
+            Presença
+        </div>
+        <div class="col-sm-1">
+            Cancelar
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        @foreach (Consulta consulta in Model)
+        {
+            <div class="row">
+                <div class="col-sm-1">
+                    @Html.DisplayFor(model => consulta.DataConsulta)
+                </div>
+                <div align="center" class="col-sm-1">
+                    @Html.DisplayFor(model => consulta.HoraConsulta)
+                </div>
+                <div class="col-sm-3">
+                    @consulta.Paciente.Nome
+                </div>
+                <div class="col-sm-3">
+                    @consulta.Medico.Nome
+                </div>
+                <div class="col-sm-1 mt-1">
+                    <a class='btn btn-sm btn-primary' asp-action="Edit" asp-route-id='@consulta.Id'>Reagendar</a>
+                </div>
+                <div class="col-sm-1 mt-1">
+                    @if (consulta.Presenca == true)
+                    {
+                        <label class='btn btn-sm btn-success'>Confirmada</label>
+                    }
+                    else
+                    {
+                        <a class='btn btn-sm btn-outline-warning' data-toggle='modal' data-target='#modalConfirmacao' data-code='@consulta.Id'>Confirmar</a>
+                    }
+                </div>
+                <div class="col-sm-1 mt-1">
+                    <a class='btn btn-sm btn-danger' asp-action="Delete" asp-route-id='@consulta.Id'>Cancelar</a>
+                </div>
+            </div>
+        }
+    }
+</div>
+
+<script>
+    window.onload = function () {
+        $('#modalConfirmacao').on('show.bs.modal', function (e) {
+            let code = $(e.relatedTarget).data('code');
+            let s = document.getElementById('btnConfirmar').getAttribute('formaction');
+
+            document.getElementById('btnConfirmar').removeAttribute('formaction');
+            document.getElementById('btnConfirmar').setAttribute('formaction', s + '/' + code);
+        });
+    }
+</script>

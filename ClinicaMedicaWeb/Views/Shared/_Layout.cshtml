@@ -29,17 +29,23 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Sistema">Sistema</a>
                             </li>
-                        }
-                        @if (User.IsInRole("Administrador"))
-                        {
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Medico" asp-action="Index">Médicos</a>
                             </li>
-                        }
-                        @if (User.IsInRole("Administrador"))
-                        {
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-controller="Secretaria" asp-action="Index">Secretários</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Secretaria"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Paciente" asp-action="Index">Pacientes</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Consulta" asp-action="Index">Consultas</a>
                             </li>
                         }
                     </ul>

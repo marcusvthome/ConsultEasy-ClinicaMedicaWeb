@@ -20,6 +20,7 @@ namespace ClinicaMedicaWeb.Data
         public DbSet<Administrador> TBAdministrador { get; set; }
         public DbSet<Medico> TBMedico { get; set; }
         public DbSet<Secretaria> TBSecretaria { get; set; }
-
+        public DbSet<Paciente> TBPaciente { get; set; }
+        public DbSet<Consulta> TBConsulta { get; set; }
     }
 }
