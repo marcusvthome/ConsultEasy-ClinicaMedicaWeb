@@ -245,7 +245,7 @@ namespace ClinicaMedicaWeb.Controllers
                 {
                     consulta.NomePaciente = "";
                     consulta.NomeMedico = "";
-                    List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.DataConsulta == consulta.DataConsulta).OrderBy(a => a.DataConsulta).ToList();
+                    List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).Where(x => x.DataConsulta == consulta.DataConsulta).OrderBy(a => a.DataConsulta).ToList();
                     return View(lista);
                 }
                 else
@@ -253,44 +253,44 @@ namespace ClinicaMedicaWeb.Controllers
                     if (consulta.NomePaciente != null && consulta.NomeMedico == null)
                     {
                         consulta.NomePaciente = consulta.NomePaciente.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.NomePaciente != null && consulta.NomeMedico != null)
                     {
                         consulta.NomePaciente = consulta.NomePaciente.Trim().ToUpper();
                         consulta.NomeMedico = consulta.NomeMedico.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.NomePaciente == null && consulta.NomeMedico != null)
                     {
                         consulta.NomeMedico = consulta.NomeMedico.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.DataConsulta >= DateTime.Now.Date)
                     {
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.DataConsulta >= DateTime.Now.Date && consulta.NomePaciente != null)
                     {
                         consulta.NomePaciente = consulta.NomePaciente.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.DataConsulta >= DateTime.Now.Date && consulta.NomeMedico != null)
                     {
                         consulta.NomeMedico = consulta.NomeMedico.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                     else if (consulta.DataConsulta >= DateTime.Now.Date && consulta.NomePaciente != null && consulta.NomeMedico != null)
                     {
                         consulta.NomePaciente = consulta.NomePaciente.Trim().ToUpper();
                         consulta.NomeMedico = consulta.NomeMedico.Trim().ToUpper();
-                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).OrderBy(a => a.DataConsulta).ToList();
+                        List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Paciente.Nome.ToUpper().Contains(consulta.NomePaciente)).Where(x => x.Medico.Nome.ToUpper().Contains(consulta.NomeMedico)).Where(x => x.DataConsulta == consulta.DataConsulta).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).OrderBy(a => a.DataConsulta).ToList();
                         return View(lista);
                     }
                 }
@@ -301,7 +301,8 @@ namespace ClinicaMedicaWeb.Controllers
 
         public IActionResult Index()
         {
-            List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.DataConsulta == DateTime.Now.Date).OrderBy(a => a.DataConsulta).ToList();
+            DateTime dataHoje = DateTime.Now;
+            List<Consulta> lista = dataContext.TBConsulta.Include(x => x.Paciente).Include(x => x.Medico).Where(x => x.Status != StatusConsulta.Cancelado).Where(x => x.Status != StatusConsulta.Finalizado).Where(x => x.DataConsulta == dataHoje.Date).OrderBy(a => a.DataConsulta).ToList();
             return View(lista);
         }
     }

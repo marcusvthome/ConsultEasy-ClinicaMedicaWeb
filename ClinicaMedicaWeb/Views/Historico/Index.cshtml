@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Consulta>;
+
+<div class="mb-3 mt-1">
+    <h2>Histórico de Consultas de Pacientes</h2>
+</div>
+
+@if (TempData["TipoMensagem"] != null)
+{
+    if (TempData["TipoMensagem"].ToString() == "ERRO")
+    {
+        <div class="alert alert-danger">@TempData["Mensagem"].ToString()</div>
+    }
+    else if (TempData["TipoMensagem"].ToString() == "SUCESSO")
+    {
+        <div class="alert alert-success">@TempData["Mensagem"].ToString()</div>
+    }
+}
+
+<form method="post">
+    <div class="form-group">
+
+        <input id="dateDataConsulta" name="DataConsulta" type="date" class="span4"/>
+
+        <input id="txtNomePaciente" name="NomePaciente" class="span4" placeholder="Pesquisar por Paciente" />
+
+        <input id="txtNomeMedico" name="NomeMedico" class="span4" placeholder="Pesquisar por Médico" />
+
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </div>
+</form>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-1">
+            Data
+        </div>
+        <div align="center" class="col-sm-1">
+            Hora
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Paciente)
+        </div>
+        <div class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Medico)
+        </div>
+        <div class="col-sm-2">
+            Consulta
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+        @foreach (Consulta consulta in Model)
+        {
+            <div class="row">
+                <div class="col-sm-1">
+                    @Html.DisplayFor(model => consulta.DataConsulta)
+                </div>
+                <div align="center" class="col-sm-1">
+                    @Html.DisplayFor(model => consulta.HoraConsulta)
+                </div>
+                <div class="col-sm-3">
+                    @consulta.Paciente.Nome
+                </div>
+                <div class="col-sm-3">
+                    @consulta.Medico.Nome
+                </div>
+                <div class="col-sm-2 mt-1">
+                    <a class='btn btn-sm btn-primary' asp-action="ExibirDetalhesConsulta" asp-route-id='@consulta.Id'>Visualizar</a>
+                </div>
+            </div>
+        }
+    }
+</div>

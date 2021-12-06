@@ -66,5 +66,13 @@ namespace ClinicaMedicaWeb.Models
 
         [NotMapped]
         public string NomePaciente { get; set; }
+
+        [NotMapped]
+        [MinLength(8, ErrorMessage = "Utilize 8 caracteres")]
+        [MaxLength(8, ErrorMessage = "Utilize ao máximo 8 caracteres")]
+        [DataType(DataType.Password)]
+        public string Chave { get; set; }
+
+        public bool Privado { get; set; }
     }
 }

@@ -25,29 +25,36 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+
     <div class="container mt-5">
-        <form method="post">
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form method="post">
+                    <div class="card-body shadow mt-5">
+                        @if (ViewBag.Erro != null)
+                        {
+                            <div class="alert alert-danger">@ViewBag.Erro</div>
+                        }
+                        <h3 class="text-center mt-2 mb-2 display-4">ConsultEasy</h3>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Senha"></label>
+                            <input asp-for="Senha" class="form-control" />
+                            <span asp-validation-for="Senha" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                            <a asp-action="RecuperarSenha"> Esqueceu a senha?</a>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Senha"></label>
-                <input asp-for="Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Entrar</button>
-                <a asp-action="RecuperarSenha"> Esqueceu a senha?</a>
-            </div>
-        </form>
-
-        @if (ViewBag.Erro != null)
-        {
-            <div class="alert alert-danger">@ViewBag.Erro</div>
-        }
+           
+        </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

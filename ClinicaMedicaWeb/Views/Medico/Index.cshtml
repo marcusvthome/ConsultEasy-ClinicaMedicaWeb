@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<Medico>;
 
-<h1>ConsultEasy</h1>
+<h2>Médicos</h2>
 
-<a asp-action="Create">Cadastrar novo Usuário - Médico</a>
+<div class="mb-3 mt-1">
+    <a asp-action="Create"><strong>+ Cadastrar Novo Médico(a)</strong></a>
+</div>
 
 @if (TempData["TipoMensagem"] != null)
 {

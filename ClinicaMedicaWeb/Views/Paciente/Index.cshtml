@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<Paciente>;
 
-<h1>ConsultEasy</h1>
+<h2>Pacientes</h2>
 
-<a asp-action="Create">Cadastrar novo Paciente</a>
+<div  class="mb-3 mt-1">
+    <a asp-action="Create"><strong>+ Cadastrar novo Paciente</strong></a>
+</div>
+
 
 @if (TempData["TipoMensagem"] != null)
 {
@@ -58,14 +61,14 @@
 <div class="container">
     <div class="row">
 
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             @Html.DisplayNameFor(model => model.Nome)
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             @Html.DisplayNameFor(model => model.CPF)
         </div>
         <div class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
+            Data de Nascimento
         </div>
         <div class="col-sm-1">
             Editar
@@ -80,14 +83,14 @@
         @foreach (Paciente paciente in Model)
         {
             <div class="row">
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     @paciente.Nome
                 </div>
-                <div class="col-sm-2">
+                <div class="col-sm-3">
                     @paciente.CPF
                 </div>
                 <div class="col-sm-2">
-                    @paciente.Status
+                    @Html.DisplayFor(model => paciente.DataNascimento)
                 </div>
                 <div class="col-sm-1 mt-1">
                     <a class='btn btn-sm btn-primary' asp-action="Edit" asp-route-id='@paciente.Id'>Editar</a>

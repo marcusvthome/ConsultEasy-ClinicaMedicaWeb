@@ -391,7 +391,7 @@ namespace ClinicaMedicaWeb.Controllers
 
                 string link = "<a href=\"" + "https://" + HttpContext.Request.Host + "/Login/AlterarSenha/" + login.ID + "\">Alterar Senha</a>";
 
-                _mailMessage.Body = "<b>Aqui está o ink para a sua recuperação senha: " + link;
+                _mailMessage.Body = "<b>Aqui está o link para a sua recuperação senha: " + link;
 
                 //CONFIGURAÇÃO COM PORTA
                 SmtpClient _smtpClient = new SmtpClient("smtp.gmail.com", Convert.ToInt32("587"));
@@ -412,7 +412,8 @@ namespace ClinicaMedicaWeb.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine("Erro", Environment.NewLine, ex.StackTrace);
+                return false;
             }
         }
 
@@ -494,12 +495,12 @@ namespace ClinicaMedicaWeb.Controllers
             {
                 LinkRecuperarSenha(login);
 
-                ViewBag.Sucesso = "Se há um usuário existe, o link de recuperação de senha será enviado neste e-mail!";
+                ViewBag.Sucesso = "Se há um usuário com este e-mail, o link de recuperação de senha será enviado!";
                 return View();
             }
             else
             {
-                ViewBag.Erro = "Email não encontrado";
+                ViewBag.Erro = "Se há um usuário com este e-mail, o link de recuperação de senha será enviado!";
 
             }
             return View();

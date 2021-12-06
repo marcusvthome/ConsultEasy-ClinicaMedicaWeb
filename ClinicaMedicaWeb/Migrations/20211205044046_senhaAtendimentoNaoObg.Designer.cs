@@ -4,14 +4,16 @@ using ClinicaMedicaWeb.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ClinicaMedicaWeb.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20211205044046_senhaAtendimentoNaoObg")]
+    partial class senhaAtendimentoNaoObg
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,14 +89,14 @@ namespace ClinicaMedicaWeb.Migrations
                     b.Property<bool>("Presenca")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("Privado")
-                        .HasColumnType("bit");
-
                     b.Property<int?>("SecretariaId")
                         .HasColumnType("int");
 
                     b.Property<int?>("SecretariaIdCancelamento")
                         .HasColumnType("int");
+
+                    b.Property<string>("Senha")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");

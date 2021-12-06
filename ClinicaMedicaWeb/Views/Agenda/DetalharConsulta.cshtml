@@ -1,0 +1,74 @@
+﻿@model ClinicaMedicaWeb.Models.Consulta;
+
+@if (ViewBag.TipoMensagem != null)
+{
+    if (ViewBag.TipoMensagem == "ERRO")
+    {
+<div class="alert alert-danger">@ViewBag.Mensagem</div> }
+else if (ViewBag.TipoMensagem == "SUCESSO")
+{
+<div class="alert alert-success">@ViewBag.Mensagem</div>}
+}
+
+<form method="post" asp-action="DetalharConsulta">
+    <input type="hidden" asp-for="Id" />
+    <div>
+        <div class="form-group">
+            <label asp-for="Medico.Nome">Médico</label>
+            <input asp-for="Medico.Nome" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="DataConsulta"></label>
+            <input asp-for="DataConsulta" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="HoraConsulta"></label>
+            <input type="time" asp-for="HoraConsulta" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Paciente.Nome">Paciente</label>
+            <input asp-for="Paciente.Nome" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Paciente.DataNascimento"></label>
+            <input asp-for="Paciente.DataNascimento" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Paciente.Telefone"></label>
+            <input asp-for="Paciente.Telefone" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Paciente.Profissao"></label>
+            <input asp-for="Paciente.Profissao" class="form-control" readonly />
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Observacao"></label>
+            <textarea asp-for="Observacao" class="form-control" rows="6"></textarea>
+            <span asp-validation-for="Observacao" class="text-danger small"></span>
+        </div>
+
+        <label>Deseja privar as anotações desta consulta?</label>
+        <label>Se sim, digite uma chave para criptografá-la</label>
+
+        <div class="form-group">
+            <label asp-for="Chave">Senha </label>
+            <input asp-for="Chave" class="form-control" />
+            <span asp-validation-for="Chave" class="text-danger small"></span>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Encerrar</button>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

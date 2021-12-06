@@ -26,42 +26,49 @@
 </head>
 <body>
     <div class="container mt-5">
-        <form method="post" asp-action="AlterarSenha">
-            <input type="hidden" asp-for="ID" />
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <form method="post" asp-action="AlterarSenha">
+                    <div class="card-body shadow mt-5">
+                        @if (ViewBag.Erro != null)
+                        {
+                            <div class="alert alert-danger">@ViewBag.Erro</div>
+                        }
 
-            <div class="form-group">
-                <label asp-for="Email">E-mail</label>
-                <input asp-for="Email" class="form-control" readonly />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                        @if (ViewBag.Sucesso != null)
+                        {
+                            <div class="alert alert-success">@ViewBag.Sucesso</div>
+                        }
+
+                        <input type="hidden" asp-for="ID" />
+
+                        <h3 class="text-center mt-3 mb-4" style="font-size: large;">Alterar Senha</h3>
+                        <div class="form-group">
+                            <label asp-for="Email">E-mail</label>
+                            <input asp-for="Email" class="form-control" readonly />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Senha">Nova Senha</label>
+                            <input asp-for="Senha" class="form-control" />
+                            <span asp-validation-for="Senha" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="SenhaConfirmar">Confirmar Senha</label>
+                            <input asp-for="SenhaConfirmar" class="form-control" />
+                            <span asp-validation-for="SenhaConfirmar" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </div>
+                </form>
+
             </div>
-
-            <div class="form-group">
-                <label asp-for="Senha">Nova Senha</label>
-                <input asp-for="Senha" class="form-control" />
-                <span asp-validation-for="Senha" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="SenhaConfirmar">Confirmar Senha</label>
-                <input asp-for="SenhaConfirmar" class="form-control" />
-                <span asp-validation-for="SenhaConfirmar" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Salvar</button>
-            </div>
-        </form>
-
-        @if (ViewBag.Erro != null)
-        {
-            <div class="alert alert-danger">@ViewBag.Erro</div>
-        }
-
-        @if (ViewBag.Sucesso != null)
-        {
-            <div class="alert alert-success">@ViewBag.Sucesso</div>
-        }
-
+        </div>
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

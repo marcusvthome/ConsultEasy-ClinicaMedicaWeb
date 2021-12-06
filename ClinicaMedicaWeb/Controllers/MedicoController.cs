@@ -154,7 +154,9 @@ namespace ClinicaMedicaWeb.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine("Erro",
+                Environment.NewLine, ex.StackTrace);
+                return false;
             }
         }
 

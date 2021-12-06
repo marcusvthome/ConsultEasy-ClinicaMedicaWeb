@@ -1,8 +1,10 @@
 ﻿@model IEnumerable<Consulta>;
 
-<h1>ConsultEasy</h1>
+<h2>Consultas</h2>
 
-<a asp-action="Create">Agendar Nova Consulta</a>
+<div class="mb-3 mt-1">
+    <a asp-action="Create"><strong>+ Agendar Nova Consulta</strong></a>
+</div>
 
 @if (TempData["TipoMensagem"] != null)
 {
@@ -18,8 +20,7 @@
 
 <form method="post">
     <div class="form-group">
-
-        <input id="dateDataConsulta" name="DataConsulta" type="date" class="span4" value="@DateTime.Now.Year-@DateTime.Now.Month-@DateTime.Now.Day" />
+        <input id="dateDataConsulta" name="DataConsulta" type="date" class="span4"/>
 
         <input id="txtNomePaciente" name="NomePaciente" class="span4" placeholder="Pesquisar por Paciente" />
 
@@ -54,7 +55,6 @@
         </div>
     </div>
 </form>
-
 
 <div class="container">
     <div class="row">

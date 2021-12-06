@@ -252,7 +252,7 @@ namespace ClinicaMedicaWeb.Controllers
                 {
                     paciente.Nome = "";
                     paciente.CPF = "";
-                    List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Status != Status.Inativo).ToList();
+                    List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Status != Status.Inativo).OrderBy(x => x.Nome).ToList();
                     return View(lista);
                 }
                 else
@@ -260,21 +260,21 @@ namespace ClinicaMedicaWeb.Controllers
                     if (paciente.Nome != null && paciente.CPF == null)
                     {
                         paciente.Nome = paciente.Nome.Trim().ToUpper();
-                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Nome.ToUpper().Contains(paciente.Nome)).Where(x => x.Status != Status.Inativo).ToList();
+                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Nome.ToUpper().Contains(paciente.Nome)).Where(x => x.Status != Status.Inativo).OrderBy(x => x.Nome).ToList();
                         return View(lista);
                     }
                     else if (paciente.Nome != null && paciente.CPF != null)
                     {
                         paciente.Nome = paciente.Nome.Trim().ToUpper();
                         paciente.CPF = paciente.CPF.Trim().Replace("-", "").Replace(".", "");
-                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Nome.ToUpper().Contains(paciente.Nome)).Where(x => x.CPF.Replace("-", "").Replace(".", "").Contains(paciente.CPF)).Where(x => x.Status != Status.Inativo).ToList();
+                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Nome.ToUpper().Contains(paciente.Nome)).Where(x => x.CPF.Replace("-", "").Replace(".", "").Contains(paciente.CPF)).Where(x => x.Status != Status.Inativo).OrderBy(x => x.Nome).ToList();
                         return View(lista);
                     }
 
                     else if (paciente.Nome == null && paciente.CPF != null)
                     {
                         paciente.CPF = paciente.CPF.Trim().Replace("-", "").Replace(".", "");
-                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.CPF.Replace("-", "").Replace(".", "").Contains(paciente.CPF)).Where(x => x.Status != Status.Inativo).ToList();
+                        List<Paciente> lista = dataContext.TBPaciente.Where(x => x.CPF.Replace("-", "").Replace(".", "").Contains(paciente.CPF)).Where(x => x.Status != Status.Inativo).OrderBy(x => x.Nome).ToList();
                         return View(lista);
                     }
                 }
@@ -285,7 +285,7 @@ namespace ClinicaMedicaWeb.Controllers
 
         public IActionResult Index()
         {
-            List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Status != Status.Inativo).ToList();
+            List<Paciente> lista = dataContext.TBPaciente.Where(x => x.Status != Status.Inativo).OrderBy(x => x.Nome).ToList();
             return View(lista);
         }
     }
